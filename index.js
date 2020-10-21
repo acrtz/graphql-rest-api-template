@@ -4,13 +4,14 @@ const bodyParser = require("body-parser");
 const { ApolloServer } = require("apollo-server-express");
 
 const { typeDefs, resolvers, context } = require("./graphql");
+const webhooks = require("./webhooks");
 
 const PORT = process.env.PORT || 4000;
 
 // Initialize the express server
 const app = express();
 
-// Enabla cross-origin resource sharing (CORS) requests for all routes
+// Enable cross-origin resource sharing (CORS) requests for all routes
 // This basically means you can make ajax requests to urls different from this api's
 // For more information on CORS go to
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
@@ -26,7 +27,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Set up Apollo Server
+// Initialize Apollo Server
 // typeDefs, resolvers and context are explained in their respective folders
 // to learn more about ApolloServer initialization and all its options go to
 // https://www.apollographql.com/docs/apollo-server/api/apollo-server
@@ -36,7 +37,7 @@ const apolloServer = new ApolloServer({
   context, // Optional
 });
 
-// connect apolloServer to express app server.
+// Connect apolloServer to express app server.
 // similar to app.use(), except it is happening inside of
 // apolloServer.applyMiddleware
 // To learn about additional apollo middlewares go to
@@ -44,10 +45,16 @@ const apolloServer = new ApolloServer({
 apolloServer.applyMiddleware({
   app,
   path: "/graphql", // defaults to '/graphql'
-  bodyParserConfig: false,
+  bodyParserConfig: false, // set to false because is already done by bodyParser
 });
 
-// tell the server to listen on a specific port
+// OPTIONAL
+// Only needed if using ./webhooks from 3rd party services, like github, payment providers,
+// email delivery platforms etc.
+// Look in ./webhooks/index.js for more details
+app.use("/webhooks", webhooks);
+
+// Tell the server to listen on a specific port
 const server = app.listen({ port: PORT }, () => {
   console.log(`listening on port ${PORT}`);
 });
