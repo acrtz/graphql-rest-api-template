@@ -12,6 +12,6 @@ module.exports = {
     updateArticle: (parent, params, context) =>
       Article.updateArticle(params.article),
     deleteArticle: (parent, params, context) =>
-      Article.deleteArticle(params.article),
+      Article.deleteArticle(params.id),
   },
 };

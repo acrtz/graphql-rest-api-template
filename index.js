@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const { ApolloServer } = require("apollo-server-express");
 
+const dbMigration = require("./db/migration");
 const { typeDefs, resolvers, context } = require("./graphql");
 const webhooks = require("./webhooks");
 
@@ -57,4 +58,5 @@ app.use("/webhooks", webhooks);
 // Tell the server to listen on a specific port
 const server = app.listen({ port: PORT }, () => {
   console.log(`listening on port ${PORT}`);
+  dbMigration.run();
 });

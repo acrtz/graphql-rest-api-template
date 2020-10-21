@@ -1,14 +1,28 @@
-const db = require("../db");
+const knex = require("../db/knex");
 
-const getArticle = (id) => db.getArticle(id);
+const getArticle = (id) =>
+  knex("articles")
+    .where({ id })
+    .then(([article]) => article);
 
-const getArticles = () => db.getArticles();
+const getArticles = () => knex("articles");
 
-const createArticle = (article) => db.createArticle(article);
+const createArticle = (article) =>
+  knex("articles")
+    .insert(article)
+    .then(([id]) => id);
 
-const updateArticle = (article) => db.updateArticle(article);
+const updateArticle = (article) =>
+  knex("articles")
+    .where({ id: article.id })
+    .update(article)
+    .then(() => article.id);
 
-const deleteArticle = (id) => db.deleteArticle(id);
+const deleteArticle = (id) =>
+  knex("articles")
+    .where({ id })
+    .del()
+    .then(() => id);
 
 module.exports = {
   getArticle,
