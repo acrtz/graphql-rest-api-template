@@ -13,13 +13,8 @@ const articles = [
   },
 ];
 
-const fakeDBConnection = (request) => {
-  const response = request();
-  console.log({ response });
-  return new Promise((resolve, reject) =>
-    setTimeout(() => resolve(response), 300)
-  );
-};
+const fakeDBConnection = (request) =>
+  new Promise((resolve, reject) => setTimeout(() => resolve(response), 300));
 
 const getArticle = (id) =>
   fakeDBConnection(() => articles.find((article) => article.id === id));
