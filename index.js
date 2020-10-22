@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { ApolloServer } = require("apollo-server-express");
 
+const apolloServer = require("./graphql");
 const dbMigration = require("./db/migrations");
-const { typeDefs, resolvers, context } = require("./graphql");
 const webhooks = require("./webhooks");
 
 const PORT = process.env.PORT || 4000;
@@ -28,20 +27,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Initialize Apollo Server
-// typeDefs, resolvers and context are explained in their respective folders
-// to learn more about ApolloServer initialization and all its options go to
-// https://www.apollographql.com/docs/apollo-server/api/apollo-server
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context, // Optional
-});
-
 // Connect apolloServer to express app server.
 // similar to app.use(), except it is happening inside of
-// apolloServer.applyMiddleware
-// To learn about additional apollo middlewares go to
+// apolloServer.applyMiddleware. Look inside ./graphql/index
+// to learn how apolloServer is initialized.
+// To learn more about apollo middleware go to
 // https://www.apollographql.com/docs/apollo-server/api/apollo-server/#applymiddleware
 apolloServer.applyMiddleware({
   app,
