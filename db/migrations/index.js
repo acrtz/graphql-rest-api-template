@@ -11,8 +11,6 @@ const MigrationStorage = {
   executed: async () => {
     const migrationsExist = await knex.schema.hasTable("migrations");
 
-    console.log({ migrationsExist });
-
     if (!migrationsExist) {
       return knex.schema.createTable("migrations", (table) => {
         table.increments("id").primary();
@@ -29,7 +27,9 @@ const MigrationStorage = {
 
 const run = async () => {
   const umzug = new Umzug({
-    migrations: { glob: `${process.cwd()}/db/migration/migrations/*.js` },
+    migrations: {
+      glob: [`${process.cwd()}/db/migrations/*.js`, { ignore: "index.js" }],
+    },
     storage: MigrationStorage,
   });
 
