@@ -1,4 +1,4 @@
-const Article = require("../api/article");
+const Article = require("../entities/article");
 // Provide resolver functions for your schema fields
 module.exports = {
   Query: {

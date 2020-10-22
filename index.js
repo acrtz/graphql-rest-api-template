@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const { ApolloServer } = require("apollo-server-express");
 
-const dbMigration = require("./db/migration");
+const dbMigration = require("./db/migrations");
 const { typeDefs, resolvers, context } = require("./graphql");
 const webhooks = require("./webhooks");
 
