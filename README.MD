@@ -1,6 +1,6 @@
 ## GraphQL/REST Api Template
 
-A template/tutorial for a node APIs using GraphQL and REST. Useful for those looking to move beyond the basic CRUD functionality provided by common apis.
+A template/tutorial for node APIs using GraphQL and REST. Useful for those looking to move beyond the basic CRUD functionality provided by common REST APIs.
 
 ### Usage:
 
