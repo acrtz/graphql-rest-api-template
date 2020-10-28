@@ -23,9 +23,10 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageFormats": [
-      "json",
-      "html"
-    ]
+    "collectCoverageFrom": [
+      "*.js",
+      "!**/node_modules/**"
+    ],
+    "modulePathIgnorePatterns": ["/node_modules/", "/__utils/"]
   }
 }
