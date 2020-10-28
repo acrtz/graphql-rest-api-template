@@ -1,10 +1,10 @@
 process.env.NODE_ENV = "test";
 
 const request = require("supertest");
-const app = require("../app");
-const migrations = require("../db/migrations");
-const knex = require("../db/knex");
-const Article = require("./__utils/article");
+const app = require("../../app");
+const migrations = require("../../db/migrations");
+const knex = require("../../db/knex");
+const Article = require("../__utils/article");
 
 const normalize = ({ statusCode, body: { data, errors } = {} }) => ({
   statusCode,
