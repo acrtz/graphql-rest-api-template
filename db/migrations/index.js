@@ -70,7 +70,7 @@ const run = async () => {
   const pending = await umzug.pending();
 
   if (pending.some(({ name }) => name === END_POINT)) {
-    umzug.up({ to: END_POINT });
+    await umzug.up({ to: END_POINT });
   }
 };
 
