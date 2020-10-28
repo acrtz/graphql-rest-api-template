@@ -9,24 +9,24 @@ const { gql } = require("apollo-server-express");
 // https://www.apollographql.com/docs/apollo-server/schema/schema/
 const typeDefs = gql`
   type Query {
-    getArticle(id: String!): Article
+    getArticle(id: Int!): Article
     getArticles: [Article]
   }
 
   type Mutation {
-    createArticle(article: ArticleInput!): String
-    updateArticle(article: ArticleInput!): String
-    deleteArticle(id: String!): String
+    createArticle(article: ArticleInput!): Article
+    updateArticle(article: ArticleInput!): Article
+    deleteArticle(id: Int!): Int
   }
 
   type Article {
-    id: String
+    id: Int
     title: String
     content: String
   }
 
   input ArticleInput {
-    id: String
+    id: Int
     title: String
     content: String
   }

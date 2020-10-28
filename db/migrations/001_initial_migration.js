@@ -4,7 +4,7 @@
 // with your db. Look in its corresponding file for more
 // information on knex and why this template is using
 // sqlite.
-const knex = require("../../knex");
+const knex = require("../knex");
 
 // umzug migrations are an object with an up and down functions.
 // up runs the migration and down rolls back the migration. We

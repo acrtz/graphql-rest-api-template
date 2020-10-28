@@ -10,13 +10,13 @@ const getArticles = () => knex("articles");
 const createArticle = (article) =>
   knex("articles")
     .insert(article)
-    .then(([id]) => id);
+    .then(([id]) => knex("articles").where({ id }).first());
 
 const updateArticle = (article) =>
   knex("articles")
     .where({ id: article.id })
     .update(article)
-    .then(() => article.id);
+    .then(() => knex("articles").where({ id: article.id }).first());
 
 const deleteArticle = (id) =>
   knex("articles")
