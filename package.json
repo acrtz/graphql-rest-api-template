@@ -4,7 +4,7 @@
   "description": "boiler plate to start an api with",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --coverage"
   },
   "author": "Armand Reitz",
   "license": "ISC",
@@ -15,6 +15,17 @@
     "express": "^4.17.1",
     "knex": "^0.21.6",
     "sqlite3": "^5.0.0",
+    "supertest": "^5.0.0",
     "umzug": "^3.0.0-beta.6"
+  },
+  "devDependencies": {
+    "jest": "^26.6.1"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageFormats": [
+      "json",
+      "html"
+    ]
   }
 }

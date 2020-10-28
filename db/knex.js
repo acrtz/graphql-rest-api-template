@@ -9,12 +9,14 @@
 
 // This module could easly be switched out to mongoose - mongoDB,
 // pg-promise - postgres, etc.
-const knex = require("knex")({
+const config = (ENV = "development") => ({
   client: "sqlite3",
   connection: {
-    filename: `${process.cwd()}/db/db.sqlite`,
+    filename: `${process.cwd()}/db/${ENV}_db.sqlite`,
   },
   useNullAsDefault: true,
 });
+
+const knex = require("knex")(config(process.env.NODE_ENV));
 
 module.exports = knex;
